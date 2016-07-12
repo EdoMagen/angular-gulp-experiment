@@ -10,8 +10,8 @@ const hub = new HubRegistry([conf.path.tasks('*.js')]);
 // Tell gulp to use the tasks just loaded
 gulp.registry(hub);
 
-gulp.task('inject', gulp.series(gulp.parallel('styles', 'scripts'), 'inject'));
-gulp.task('build', gulp.series('partials', gulp.parallel('inject'), 'build'));
+gulp.task('inject', gulp.series(gulp.parallel('shell', 'styles', 'scripts'), 'inject'));
+gulp.task('build', gulp.series('partials', gulp.parallel('shell', 'inject'), 'build'));
 gulp.task('dist', gulp.series('build', 'setDist'));
 gulp.task('test', gulp.series('scripts', 'karma:single-run'));
 gulp.task('test:auto', gulp.series('watch', 'karma:auto-run'));
