@@ -8,7 +8,7 @@ const gutil = require('gulp-util');
 const conf = require('../conf/gulp.conf');
 
 gulp.task('clean', clean);
-gulp.task('setDist', setDist);
+gulp.task('copyToDist', copyToDist);
 
 function clean() {
   return del([conf.paths.dist, conf.paths.tmp]).then(paths => {
@@ -17,7 +17,7 @@ function clean() {
   });
 }
 
-function setDist() {
+function copyToDist() {
   const fileFilter = filter(file => file.stat.isFile());
 
   return gulp.src([
