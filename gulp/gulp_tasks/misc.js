@@ -8,16 +8,16 @@ const gutil = require('gulp-util');
 const conf = require('../conf/gulp.conf');
 
 gulp.task('clean', clean);
-gulp.task('copyToDist', copyToDist);
+gulp.task('notSureWhatThisFunctionDoes', notSureWhatThisFunctionDoes);
 
 function clean() {
-  return del([conf.paths.dist, conf.paths.tmp]).then(paths => {
+  return del([conf.paths.dist, conf.paths.tmp, conf.paths.docs]).then(paths => {
     // this.message = paths.join('\n');
     gutil.log(gutil.colors.green('Deleted \'tmp\' and \'dist\' folders'));
   });
 }
 
-function copyToDist() {
+function notSureWhatThisFunctionDoes() {
   const fileFilter = filter(file => file.stat.isFile());
 
   return gulp.src([

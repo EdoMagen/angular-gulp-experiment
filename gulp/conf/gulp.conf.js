@@ -18,9 +18,11 @@ exports.ngModule = 'app';
  */
 exports.paths = {
   main: './',
+  vendor: 'bower_components',
   src: 'src',
   dist: 'dist',
   tmp: 'tmp',
+  docs: 'docs',
   e2e: 'e2e',
   tasks: './gulp/gulp_tasks'
 };
@@ -42,12 +44,13 @@ for (const pathName in exports.paths) {
  */
 exports.errorHandler = function (title) {
   return function (err) {
-    gutil.log(gutil.colors.red(`[${title}]`), err.toString());
+    gutil.log(gutil.colors.red(`[${title}] - ` + err.message.toString()));
+    // gutil.log(gutil.colors.red(`[${title}]`), err.message.toString());
     this.emit('end');
   };
 };
 /**
- *  Wiredep is the lib which inject bower dependencies in your project
+ *  Wiredep is the lib which inject bower dependencies in our project
  *  Mainly used to inject script tags in the index.html but also used
  *  to inject css preprocessor deps and js files in karma
  */

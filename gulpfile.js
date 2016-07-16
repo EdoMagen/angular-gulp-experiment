@@ -10,13 +10,18 @@ const hub = new HubRegistry([conf.path.tasks('*.js')]);
 // Tell gulp to use the tasks just loaded
 gulp.registry(hub);
 
+// Injects html and processes and copies files to tmp folder
 gulp.task('inject', gulp.series('shell', gulp.parallel('styles', 'scripts'), 'inject'));
+// Processes JS, CSS files from tmp concatinates and copies files to dist folder
 gulp.task('build', gulp.series('partials', gulp.parallel('inject'), 'build'));
-gulp.task('dist', gulp.series('build', 'copyToDist'));
+gulp.task('dist', gulp.series('build')); // had , 'notSureWhatThisFunctionDoes'
+gulp.task('runserver', gulp.series('shell:runServer'));
+gulp.task('docs', gulp.series('clean', 'ngdocs', 'browsersync:docs'));
 gulp.task('test', gulp.series('scripts', 'karma:single-run'));
+// If tests fail at first save again. TODO: make sure 'scripts' task finishes before karma starts
 gulp.task('test:auto', gulp.series('watch', 'karma:auto-run'));
 gulp.task('serve', gulp.series('clean', 'inject', 'browsersync', 'watch'));
-gulp.task('serve:dist', gulp.series('clean', 'build', 'copyToDist', 'browsersync:dist'));
+gulp.task('serve:dist', gulp.series('clean', 'build', 'browsersync:dist')); //had , 'notSureWhatThisFunctionDoes' - no idea what that is
 gulp.task('default', gulp.series('clean', 'build'));
 
 // -------- watchers ---------
@@ -27,6 +32,7 @@ function reloadBrowserSync(cb) {
     cb();
 }
 
+// TODO: move to separate file in gulp/gulp_tasks
 function watch(cb) {
 
     // vendor stuff
@@ -45,60 +51,3 @@ function watch(cb) {
     gulp.watch(conf.path.src('**/*.ts'), gulp.series('scripts', reloadBrowserSync));
     cb();
 }
-
-
-// function watch(done) {
-//   gulp.task('watch_vendor', function() {
-//     return gulp.watch('bower.json', gulp.parallel('inject'));
-//   });
-//
-//   gulp.task('watch_ts', function() {
-//     return gulp.watch(conf.path.src('**/*.ts'), gulp.parallel('inject'));
-//   });
-//
-//   gulp.task('watch_html', function() {
-//     return gulp.watch(conf.path.src('app/**/*.html'), reloadBrowserSync);
-//   });
-//
-//   gulp.task('watch_scss', function() {
-//     return gulp.watch(conf.path.src('**/*.scss'), conf.path.src('**/*.css'), gulp.parallel('styles'));
-//   });
-//   gulp.task('watch', gulp.parallel('watch_ts', 'watch_vendor', 'watch_html', 'watch_scss'));
-//
-//   done()
-// }
-
-// function watch(cb) {
-//
-//   // gulp.watch(conf.path.src('**/*.ts'), 'bower.json', gulp.series('inject'));
-//   // gulp.watch(conf.path.src('**/*.scss'), conf.path.src('**/*.css'), gulp.series('styles'));
-//   // gulp.watch(conf.path.src('app/**/*.html'), reloadBrowserSync);
-//
-//   // gulp.watch([
-//   //   // `!${conf.path.tmp('**/*.js')}`,
-//   //   // `!${conf.path.tmp('**/*.html')}`,
-//   //   // `!${conf.path.tmp('**/*.css')}`,
-//   //   `!${conf.paths.tmp}`,
-//   //   conf.path.src('index.html'),
-//   //   conf.path.src('**/*.ts'),
-//   //   'bower.json'
-//   // ], gulp.series('inject'));
-//
-//   //works fine
-//   gulp.watch(conf.path.src('app/**/*.html'), reloadBrowserSync);
-//   gulp.watch(conf.path.src('app/**/*.html'), gulp.series('inject'));
-//
-//   //works fine
-//   gulp.watch([
-//     conf.path.src('**/*.ts'),
-//     conf.path.src('**/*.js')
-//   ], gulp.series('scripts'));
-//
-//   //works fine
-//   gulp.watch([
-//     conf.path.src('**/*.scss'),
-//     conf.path.src('**/*.css')
-//   ], gulp.series('styles', 'inject'));
-//
-//   cb();
-// }

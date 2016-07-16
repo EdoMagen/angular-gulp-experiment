@@ -1,28 +1,26 @@
 {
-  "compilerOptions": {
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "target": "es5",
-    "module": "system",
-    "moduleResolution": "node",
-    "removeComments": false,
-    "sourceMap": true,
-    "noEmit": false,
-    "outFile": "./tmp/tsbundle.js"
-  },
-  "filesGlob": [
-    "./src/**/*.ts"
-  ],
-  "exclude": [
-      "gulp*",
-      "gulp_tasks",
-      "conf",
-      "node_modules",
-      "bower_components",
-      "typings",
-      "dist",
-      "tmp",
-      "src",
-      "./**/*.js"
-  ]
+    "compilerOptions": {
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "target": "es5",
+        "module": "system",
+        "moduleResolution": "node",
+        "removeComments": false,
+        "sourceMap": true,
+        "noEmit": false,
+        "outFile": "./tmp/tsbundle.js"
+    },
+    "filesGlob": [
+        "./src/**/*.ts"
+    ],
+    "exclude": [
+        "gulp",
+        "conf",
+        "node_modules",
+        "bower_components",
+        "typings",
+        "./**/*.js",
+        "src/app/components/Footer.spec",
+        "*spec.ts"
+    ]
 }

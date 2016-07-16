@@ -9,8 +9,8 @@ module.exports = function () {
       ],
       routes: {
         '/bower_components': 'bower_components'
-      }
+      },
+      open: "local"
     },
-    open: false
   };
 };

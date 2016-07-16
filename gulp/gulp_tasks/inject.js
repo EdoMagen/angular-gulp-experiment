@@ -8,15 +8,21 @@ const conf = require('../conf/gulp.conf');
 
 gulp.task('inject', inject);
 
+
+// New order for LaaS
+//
+//
+
+
 function inject() {
   const injectScripts = gulp.src([
-    // conf.path.tmp('app/**/*.js'),
-    conf.path.tmp('app/todos/todos.js'),
-    conf.path.tmp('app.js'),
-    conf.path.tmp('app/constants/*.js'),
-    conf.path.tmp('app/containers/*.js'),
-    conf.path.tmp('app/components/*.js'),
+    // include (in this order)
+    conf.path.tmp('app/todos/*.js'),
     conf.path.tmp('**/*.js'),
+    conf.path.tmp('app.js'),
+    conf.path.tmp('app/**/*.js'),
+
+    // avoid
     '!src/**/*.ts',
     `!${conf.path.tmp('**/*.spec.js')}`
   ]);

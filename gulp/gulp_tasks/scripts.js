@@ -1,6 +1,5 @@
 const gulp = require('gulp');
 const tslint = require('gulp-tslint');
-
 // const typescript = require('gulp-typescript');
 const typescript = require('gulp-tsc');
 // const tsConf = require('../../tsconfig.json').compilerOptions;
@@ -14,13 +13,13 @@ function scripts() {
     tmpDir: "./tmp",
     keepTree: false,
     sourcemap: true,
-    emitError: true
+    emitError: false
   }
 
   // return gulp.src(conf.path.src('**/*.ts'))
-  return gulp.src(['src/**/*.ts','!src/**/*spec.ts'])
+  return gulp.src(['src/**/*.ts'])
     .pipe(tslint())
-    .pipe(tslint.report('verbose'))
+    .pipe(tslint.report('verbose')).on('error', conf.errorHandler('TS'))
     .pipe(typescript(tscOptions)) // .pipe(typescript(tsConf)) // see matching const
     .pipe(gulp.dest(conf.paths.tmp));
 }
