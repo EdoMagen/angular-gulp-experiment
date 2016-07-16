@@ -28,6 +28,17 @@ exports.paths = {
   tasks: './gulp/gulp_tasks'
 };
 
+exports.ports = {
+  local: 8080,
+  localUI: 8081,
+  coverage: 8082,
+  coverageUI: 8082,
+  docs: 8083,
+  docsUI: 8084,
+  dist: 8085,
+  distUI: 8086
+};
+
 exports.path = {};
 for (const pathName in exports.paths) {
   if (exports.paths.hasOwnProperty(pathName)) {

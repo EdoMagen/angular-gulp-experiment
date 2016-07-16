@@ -4,7 +4,7 @@ const browserSync = require('browser-sync');
 // const watch = require('gulp-watch');
 const conf = require('./gulp/conf/gulp.conf');
 
-// Load some files into the registry
+// Load some files into the registry - all files under ./gulp
 const hub = new HubRegistry([conf.path.tasks('*.js')]);
 
 // Tell gulp to use the tasks just loaded
@@ -14,14 +14,23 @@ gulp.registry(hub);
 gulp.task('inject', gulp.series('shell', gulp.parallel('styles', 'scripts'), 'inject'));
 // Processes JS, CSS files from tmp concatinates and copies files to dist folder
 gulp.task('build', gulp.series('partials', gulp.parallel('inject'), 'build'));
-gulp.task('dist', gulp.series('build')); // had , 'notSureWhatThisFunctionDoes'
+
+// gulp.task('dist', gulp.series('build')); // had , 'notSureWhatThisFunctionDoes'
 gulp.task('runserver', gulp.series('shell:runServer'));
-gulp.task('docs', gulp.series('clean', 'ngdocs', 'browsersync:docs'));
-gulp.task('test', gulp.series('inject', 'karma:single-run', 'browsersync:coverage'));
-gulp.task('test:auto', gulp.series('watch', 'karma:auto-run'));
+
+// Testing and build FE docs
+gulp.task('test', gulp.series('clean:coverage', 'inject', 'karma:single-run'));
+gulp.task('test:auto', gulp.series('clean:coverage', 'watch', 'karma:auto-run'));
+gulp.task('docs', gulp.series('clean:docs', 'ngdocs'));
+
+// Serve [tmp], [dist], [docs] or [coverage] folders
 gulp.task('serve', gulp.series('clean', 'inject', 'browsersync', 'watch'));
-gulp.task('serve:dist', gulp.series('clean', 'build', 'browsersync:dist')); //had , 'notSureWhatThisFunctionDoes' - no idea what that is
-gulp.task('default', gulp.series('clean', 'build'));
+gulp.task('serve:dist', gulp.series('clean', 'build', 'browsersync:dist'));
+gulp.task('serve:docs', gulp.series('clean:docs', 'ngdocs', 'browsersync:docs'));
+gulp.task('serve:coverage', gulp.series('clean:coverage', 'inject', 'karma:single-run', 'browsersync:coverage'));
+
+// Default task - [inject] scripts, [serve] and [watch] for changes
+gulp.task('default', gulp.series('serve'));
 
 // -------- watchers ---------
 gulp.task('watch', watch);

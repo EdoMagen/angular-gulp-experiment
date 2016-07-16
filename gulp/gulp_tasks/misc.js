@@ -8,12 +8,26 @@ const gutil = require('gulp-util');
 const conf = require('../conf/gulp.conf');
 
 gulp.task('clean', clean);
+gulp.task('clean:docs', cleanDocs);
+gulp.task('clean:coverage', cleanCoverage);
 gulp.task('notSureWhatThisFunctionDoes', notSureWhatThisFunctionDoes);
 
 function clean() {
-  return del([conf.paths.dist, conf.paths.tmp, conf.paths.docs]).then(paths => {
+  return del([conf.paths.dist, conf.paths.tmp]).then(paths => {
     // this.message = paths.join('\n');
     gutil.log(gutil.colors.green('Deleted \'tmp\' and \'dist\' folders'));
+  });
+}
+function cleanDocs() {
+  return del([conf.paths.docs]).then(paths => {
+    // this.message = paths.join('\n');
+    gutil.log(gutil.colors.green('Deleted \'docs\' folder'));
+  });
+}
+function cleanCoverage() {
+  return del([conf.paths.coverage]).then(paths => {
+    // this.message = paths.join('\n');
+    gutil.log(gutil.colors.green('Deleted \'coverage\' folder'));
   });
 }
 
