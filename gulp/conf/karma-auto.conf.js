@@ -21,10 +21,15 @@ module.exports = function (config) {
     ],
     files: listFiles(),
     preprocessors: {
-      [conf.path.src('**/*.html')]: [
-        'ng-html2js'
-      ]
+      [conf.path.src('**/*.html')]: ['ng-html2js'],
+      'tmp/**/*.js': 'coverage',
+      'tmp/**/*.ts': 'coverage'
     },
+    reporters: ['progress', 'coverage'],
+    exclude: [
+      './node_modules',
+      './bower_components'
+    ],
     ngHtml2JsPreprocessor: {
       stripPrefix: `${conf.paths.src}/`,
       moduleName: 'app'

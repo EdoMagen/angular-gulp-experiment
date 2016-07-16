@@ -17,8 +17,7 @@ gulp.task('build', gulp.series('partials', gulp.parallel('inject'), 'build'));
 gulp.task('dist', gulp.series('build')); // had , 'notSureWhatThisFunctionDoes'
 gulp.task('runserver', gulp.series('shell:runServer'));
 gulp.task('docs', gulp.series('clean', 'ngdocs', 'browsersync:docs'));
-gulp.task('test', gulp.series('scripts', 'karma:single-run'));
-// If tests fail at first save again. TODO: make sure 'scripts' task finishes before karma starts
+gulp.task('test', gulp.series('inject', 'karma:single-run', 'browsersync:coverage'));
 gulp.task('test:auto', gulp.series('watch', 'karma:auto-run'));
 gulp.task('serve', gulp.series('clean', 'inject', 'browsersync', 'watch'));
 gulp.task('serve:dist', gulp.series('clean', 'build', 'browsersync:dist')); //had , 'notSureWhatThisFunctionDoes' - no idea what that is
