@@ -1,9 +1,8 @@
 'use strict';
 
 /**
- *  This file contains the variables used in other gulp files
- *  which defines tasks
- *  By design, we only put there very generic config values
+ *  This file contains the variables used in other gulp task definition files
+ *  By design, here we only put very generic config values
  *  which are used in several places to keep good readability
  *  of the tasks
  */
@@ -14,7 +13,7 @@ const gutil = require('gulp-util');
 exports.ngModule = 'app';
 
 /**
- *  The main paths of your project handle these with care
+ *  The main paths of our project handle these with care
  */
 exports.paths = {
   main: './',
@@ -28,6 +27,9 @@ exports.paths = {
   tasks: './gulp/gulp_tasks'
 };
 
+/**
+ *  Ports for the browserSync tasks
+ */
 exports.ports = {
   local: 8080,
   localUI: 8081,
@@ -61,6 +63,7 @@ exports.errorHandler = function (title) {
     this.emit('end');
   };
 };
+
 /**
  *  Wiredep is the lib which inject bower dependencies in our project
  *  Mainly used to inject script tags in the index.html but also used

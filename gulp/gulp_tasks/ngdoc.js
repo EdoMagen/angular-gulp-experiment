@@ -18,6 +18,7 @@ const docOptions = {
     name: "stms FE",
     version: true,
     noLib: false,
+    
     // Define .spec.ts files as external to keep the docs clean
     externalPattern: "**/*/*spec.ts"
 }

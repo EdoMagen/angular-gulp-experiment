@@ -23,10 +23,12 @@ function browserSyncDist(done) {
   browserSync.init(browserSyncDistConf());
   done();
 }
+
 function browserSyncDocs(done) {
   browserSync.init(browserSyncDocsConf());
   done();
 }
+
 function browserSyncCoverage(done) {
   browserSync.init(browserSyncCoverageConf());
   done();

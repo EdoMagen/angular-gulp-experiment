@@ -10,6 +10,14 @@ const hub = new HubRegistry([conf.path.tasks('*.js')]);
 // Tell gulp to use the tasks just loaded
 gulp.registry(hub);
 
+/***********************************
+ * 				Main Gulp tasks          *
+ ***********************************/
+/**
+ * TODO: Add assets, SASS, BE-docs (Swagger), Angular-Material handling,
+ * Proxy management, merge with STMS index.html
+ */
+
 // Injects html and processes and copies files to tmp folder
 gulp.task('inject', gulp.series('shell', gulp.parallel('styles', 'scripts'), 'inject'));
 // Processes JS, CSS files from tmp concatinates and copies files to dist folder

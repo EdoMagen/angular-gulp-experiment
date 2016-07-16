@@ -12,6 +12,5 @@ const shellRunServerCommands = [
   'echo '+ gutil.colors.blue.underline.bold('This opens LaaSServer.exe'),
 ];
 
-gulp.task('shell', shell.task(shellCommands))
-
-gulp.task('shell:runServer', shell.task(shellRunServerCommands))
+gulp.task('shell', shell.task(shellCommands));
+gulp.task('shell:runServer', shell.task(shellRunServerCommands));
