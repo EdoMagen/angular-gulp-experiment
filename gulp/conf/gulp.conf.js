@@ -23,6 +23,7 @@ exports.paths = {
   dist: 'dist',
   tmp: 'tmp',
   docs: 'docs',
+  coverage: 'coverage',
   e2e: 'e2e',
   tasks: './gulp/gulp_tasks'
 };
