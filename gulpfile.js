@@ -18,9 +18,10 @@ gulp.registry(hub);
  * Proxy management, merge with STMS index.html
  */
 
-// Injects html and processes and copies files to tmp folder
+// [For Development]: Injects html and processes and copies files to tmp folder
 gulp.task('inject', gulp.series('shell', gulp.parallel('styles', 'scripts'), 'inject'));
-// Processes JS, CSS files from tmp concatinates and copies files to dist folder
+
+// [For Production]: Processes JS, CSS files from tmp, concatinates and copies files to dist folder
 gulp.task('build', gulp.series('partials', gulp.parallel('inject'), 'build'));
 
 // gulp.task('dist', gulp.series('build')); // had , 'notSureWhatThisFunctionDoes'
@@ -28,7 +29,7 @@ gulp.task('runserver', gulp.series('shell:runServer'));
 
 // Testing and build FE docs
 gulp.task('test', gulp.series('clean:coverage', 'inject', 'karma:single-run'));
-gulp.task('test:auto', gulp.series('clean:coverage', 'watch', 'karma:auto-run'));
+gulp.task('test:auto', gulp.series('clean:coverage', 'inject', 'watch', 'karma:auto-run'));
 gulp.task('docs', gulp.series('clean:docs', 'ngdocs'));
 
 // Serve [tmp], [dist], [docs] or [coverage] folders
@@ -59,11 +60,15 @@ function watch(cb) {
 
     // scss
     gulp.watch([
+        conf.path.src('**/*.sass'),
         conf.path.src('**/*.scss'),
         conf.path.src('**/*.css')
     ], gulp.series('styles'));
 
-    // typescript
-    gulp.watch(conf.path.src('**/*.ts'), gulp.series('scripts', reloadBrowserSync));
+    // typescript + javascript
+    gulp.watch([
+      conf.path.src('**/*.js'),
+      conf.path.src('**/*.ts'),
+    ], gulp.series('scripts', reloadBrowserSync));
     cb();
 }
