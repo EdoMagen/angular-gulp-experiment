@@ -6,7 +6,7 @@ module.exports = function (config) {
     basePath: '../../',
     singleRun: true,
     autoWatch: false,
-    logLevel: 'INFO',
+    logLevel: config.LOG_WARN,
     junitReporter: {
       outputDir: 'test-reports'
     },
@@ -22,13 +22,14 @@ module.exports = function (config) {
     files: listFiles(),
     preprocessors: {
       [conf.path.src('**/*.html')]: ['ng-html2js'],
-      'tmp/**/*.js': 'coverage',
+      ['tmp/**/*.js']: ['coverage'],
       'tmp/**/*.ts': 'coverage'
     },
     reporters: ['progress', 'coverage'],
     exclude: [
       './node_modules',
-      './bower_components'
+      './bower_components',
+      './vendor',
     ],
     ngHtml2JsPreprocessor: {
       stripPrefix: `${conf.paths.src}/`,

@@ -66,10 +66,10 @@ exports.errorHandler = function (title) {
 
 /**
  *  Wiredep is the lib which inject bower dependencies in our project
- *  Mainly used to inject script tags in the index.html but also used
+ *  Mainly used to inject script tags in the index.html, but also used
  *  to inject css preprocessor deps and js files in karma
  */
 exports.wiredep = {
   exclude: [/\/bootstrap\.js$/, /\/bootstrap-sass\/.*\.js/, /\/bootstrap\.css/],
-  directory: 'bower_components'
+  directory: this.paths.vendor
 };

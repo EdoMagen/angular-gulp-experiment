@@ -11,7 +11,8 @@ module.exports = function() {
                 conf.paths.docs
             ],
             routes: {
-                '/bower_components': 'bower_components'
+                '/bower_components': 'bower_components',
+                '/vendor': 'vendor'
             },
             open: "local"
         },
