@@ -8,8 +8,8 @@ module.exports = function listFiles() {
   });
 
   const patterns = wiredep(wiredepOptions).js.concat([
-    'node_modules/babel-polyfill/browser.js',
-    `!${conf.path.tmp('**/*.spec.js')}`,
+    // 'node_modules/babel-polyfill/browser.js', //doesn't work
+    // `!${conf.path.tmp('**/*.spec.js')}`, //doesn't work
 
     // conf.path.tmp('app/todos/todos.js'),
     // conf.path.tmp('index.js'),
@@ -27,7 +27,7 @@ module.exports = function listFiles() {
 
   const files = patterns.map(pattern => ({pattern}));
   files.push({
-    pattern: conf.path.src('assets/**/*'),
+    pattern: conf.path.src('/**/*'),
     included: false,
     served: true,
     watched: true

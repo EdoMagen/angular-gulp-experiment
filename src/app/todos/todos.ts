@@ -15,7 +15,7 @@ class Todo {
 }
 
 let initialTodo: Todo = {
-  text: 'Use AngularJS with gulp',
+  text: 'Use AngularJS thanks',
   completed: false,
   id: 0
 };

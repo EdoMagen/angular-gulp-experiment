@@ -6,7 +6,7 @@ module.exports = function (config) {
     basePath: '../../',
     singleRun: false,
     autoWatch: true,
-    logLevel: 'INFO',
+    logLevel: config.LOG_ERROR,
     junitReporter: {
       outputDir: 'test-reports'
     },
@@ -28,7 +28,8 @@ module.exports = function (config) {
     reporters: ['progress', 'coverage'],
     exclude: [
       './node_modules',
-      './bower_components'
+      './bower_components',
+      './vendor'
     ],
     ngHtml2JsPreprocessor: {
       stripPrefix: `${conf.paths.src}/`,
